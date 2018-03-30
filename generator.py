@@ -18,10 +18,10 @@ def generate(max_weight: int, minimum_objects: int, maximum_objects: int):
         file.write(str(item_count) + '\n')
 
         item_weights = (randint(0, max_weight) for _ in range(item_count))
-        item_values = (randint(0, 1000) for _ in range(item_count))
+        item_values = (randint(0, 10000) for _ in range(item_count))
 
         file.write(' '.join(map(str, item_weights)) + '\n')
         file.write(' '.join(map(str, item_values)) + '\n')
 
 
-generate(20000, 100, 200)
+generate(20000, 0, 40)

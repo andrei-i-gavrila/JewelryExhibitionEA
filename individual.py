@@ -14,8 +14,13 @@ class Individual:
         if probability > random():
             self.data[randint(0, self.size - 1)] = round(random())
 
-    def crossover(self, other):
-        return Individual(self.size, [self.data[i] if random() < .5 else other.data[i] for i in range(self.size)])
+    def crossover(self, other, problem):
+        new = Individual(self.size, [self.data[i] if random() < .5 else other.data[i] for i in range(self.size)])
+        if other.fitness(problem) < new.fitness(problem) > self.fitness(problem):
+            return new
+        if new.fitness(problem) < other.fitness(problem) > self.fitness(problem):
+            return other
+        return self
 
     def fitness(self, problem):
         if self.fitness_value is not None:
@@ -27,5 +32,14 @@ class Individual:
 
         if total_weight > problem.max_weight:
             self.fitness_value += (total_weight - problem.max_weight) * problem.weight_penalty
+
+        elements_count = sum(self.data)
+        if elements_count > problem.maximum_objects:
+            self.fitness_value += (elements_count - problem.maximum_objects) * problem.count_penalty
+        if elements_count < problem.minimum_objects:
+            self.fitness_value += (problem.maximum_objects - elements_count) * problem.count_penalty
+
+        # if self.fitness_value < 0:
+        #     self.fitness_value = .1
 
         return self.fitness_value
