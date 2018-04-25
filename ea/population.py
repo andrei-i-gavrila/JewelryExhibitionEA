@@ -1,6 +1,6 @@
 import random
 
-from individual import Individual
+from ea.individual import Individual
 
 
 class Population:

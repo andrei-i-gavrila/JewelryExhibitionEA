@@ -1,4 +1,4 @@
-from population import Population
+from ea.population import Population
 
 
 class Algorithm:

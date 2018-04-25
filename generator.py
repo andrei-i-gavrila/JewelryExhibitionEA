@@ -24,4 +24,4 @@ def generate(max_weight: int, minimum_objects: int, maximum_objects: int):
         file.write(' '.join(map(str, item_values)) + '\n')
 
 
-generate(20000, 0, 40)
+generate(20000, 0, 10)
